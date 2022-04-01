@@ -1,0 +1,28 @@
+{
+  "name": "suzumi-api",
+  "version": "1.0.0",
+  "description": "an api wrapper for Suzumi Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bad-Boy-Codes/Suzumi-Api.git"
+  },
+  "keywords": [
+    "api",
+    "suzumi",
+    "badboy"
+  ],
+  "author": "bad-boy-codes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bad-Boy-Codes/Suzumi-Api/issues"
+  },
+  "homepage": "https://github.com/Bad-Boy-Codes/Suzumi-Api#readme",
+  "dependencies": {
+    "axios": "^0.26.1"
+  },
+  "devDependencies": {}
+}

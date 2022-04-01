@@ -1,32 +1,32 @@
-import fetch from "node-fetch";
+const { get } = require("axios");
 
 module.exports = class SuzumiApi {
-  constructor({
-    token = "suzumiApiIsCool"
-  }) {
+  constructor({ token = "suzumiApiIsCool" }) {
     this.token = token;
+
     this.baseURL = "https://badboy.is-a.dev/api";
   }
 
   async image(endpoint, data = {}) {
     if (!endpoint) throw "Missing endpoint";
-    var url = new URL(`${this.baseURL}/image/${endpoint}`);
-
-    Object.keys(data).forEach((key) => url.searchParams.append(key, data[key]));
 
     try {
-      let image = await fetch(url, {
+      let image = await get(`${this.baseURL}/image/${endpoint}`, {
+        params: {
+          data,
+        },
+
         headers: {
-          Authorization: this.token
-        }
+          Authorization: `Bearer ${this.token}`,
+        },
       });
-      if (res.status == 404) return {
-        error: "Unknown Endpoint."
-      }
-      if ([400, 500, 411].includes(image.status)) return image.json();
 
-      return image.body;
+      if (res.status == 404)
+        return {
+          error: "Unknown Endpoint.",
+        };
 
+      return image.data;
     } catch (err) {
       throw err;
     }
@@ -34,22 +34,24 @@ module.exports = class SuzumiApi {
 
   async json(endpoint, data = {}) {
     if (!endpoint) throw "Missing endpoint";
-    var url = new URL(`${this.baseURL}/json/${endpoint}`);
-
-    Object.keys(data).forEach((key) => url.searchParams.append(key, data[key]));
 
     try {
-      let json = await fetch(url, {
+      let json = await get(`${this.baseURL}/json/${endpoint}`, {
+        params: {
+          data,
+        },
+
         headers: {
-          Authorization: this.token
-        }
+          Authorization: `Bearer ${this.token}`,
+        },
       });
-      if (res.status == 404) return {
-        error: "Unknown Endpoint."
-      }
 
-      return image.json();
+      if (res.status == 404)
+        return {
+          error: "Unknown Endpoint.",
+        };
 
+      return image.data;
     } catch (err) {
       throw err;
     }
@@ -57,27 +59,27 @@ module.exports = class SuzumiApi {
 
   async get(category, endpoint, data = {}) {
     if (!endpoint) throw "Missing endpoint";
-    var url = new URL(`${this.baseURL}/${category}/${endpoint}`);
-
-    Object.keys(data).forEach((key) => url.searchParams.append(key, data[key]));
 
     try {
-      let request = await fetch(url, {
+      let request = await get(`${this.baseURL}/${category}/${endpoint}`, {
+        params: {
+          data,
+        },
+
         headers: {
-          Authorization: this.token
-        }
+          Authorization: `Bearer ${this.token}`,
+        },
       });
-      if (res.status == 404) return {
-        error: "Unknown Endpoint."
-      }
-      if ([400, 500, 411].includes(request.status)) return request.json();
 
-      if (category.toLowerCase() == "image")return request.body;
-      else if (category.toLowerCase() == "json") return request.json();
-      else return request;
+      if (res.status == 404)
+        return {
+          error: "Unknown Endpoint.",
+        };
 
+      return request.data;
     } catch (err) {
       throw err;
     }
   }
 };
+;
