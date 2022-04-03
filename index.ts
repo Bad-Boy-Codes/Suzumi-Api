@@ -1,17 +1,20 @@
-const { get } = require("axios");
+import axios from "axios";
 
-module.exports = class SuzumiApi {
-  constructor({ token = "suzumiApiIsCool" }) {
-    this.token = token;
+export = class SuzumiApi {
+  public token: string;
+  public baseURL: string;
 
-    this.baseURL = "https://badboy.is-a.dev/api";
+  constructor(args?: { token?: string; url?: string }) {
+    this.token = args?.token ?? "suzumiApiIsCool";
+
+    this.baseURL = args?.url ?? "https://badboy.is-a.dev/api";
   }
 
-  async image(endpoint, data = {}) {
+  async image(endpoint: string, data = {}) {
     if (!endpoint) throw "Missing endpoint";
 
     try {
-      let image = await get(`${this.baseURL}/image/${endpoint}`, {
+      let image = await axios.get(`${this.baseURL}/image/${endpoint}`, {
         params: {
           data,
         },
@@ -21,7 +24,7 @@ module.exports = class SuzumiApi {
         },
       });
 
-      if (res.status == 404)
+      if (image.status == 404)
         return {
           error: "Unknown Endpoint.",
         };
@@ -32,11 +35,11 @@ module.exports = class SuzumiApi {
     }
   }
 
-  async json(endpoint, data = {}) {
+  async json(endpoint: string, data = {}) {
     if (!endpoint) throw "Missing endpoint";
 
     try {
-      let json = await get(`${this.baseURL}/json/${endpoint}`, {
+      let json = await axios.get(`${this.baseURL}/json/${endpoint}`, {
         params: {
           data,
         },
@@ -46,22 +49,22 @@ module.exports = class SuzumiApi {
         },
       });
 
-      if (res.status == 404)
+      if (json.status == 404)
         return {
           error: "Unknown Endpoint.",
         };
 
-      return image.data;
+      return json.data;
     } catch (err) {
       throw err;
     }
   }
 
-  async get(category, endpoint, data = {}) {
+  async get(category: string, endpoint: string, data = {}) {
     if (!endpoint) throw "Missing endpoint";
 
     try {
-      let request = await get(`${this.baseURL}/${category}/${endpoint}`, {
+      let request = await axios.get(`${this.baseURL}/${category}/${endpoint}`, {
         params: {
           data,
         },
@@ -71,7 +74,7 @@ module.exports = class SuzumiApi {
         },
       });
 
-      if (res.status == 404)
+      if (request.status == 404)
         return {
           error: "Unknown Endpoint.",
         };
@@ -81,5 +84,8 @@ module.exports = class SuzumiApi {
       throw err;
     }
   }
+  async endpoints() {
+    let request = await axios.post(this.baseURL);
+    return request.data;
+  }
 };
-;
