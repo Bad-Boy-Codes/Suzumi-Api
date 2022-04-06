@@ -1,6 +1,6 @@
 {
   "name": "suzumi-api",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "an api wrapper for Suzumi Api",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "keywords": [
     "api",
     "suzumi",
-    "badboy"
+    "rest-api"
   ],
   "author": "bad-boy-codes",
   "license": "ISC",

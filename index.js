@@ -42,107 +42,80 @@ module.exports = /** @class */ (function () {
         this.token = (_a = args === null || args === void 0 ? void 0 : args.token) !== null && _a !== void 0 ? _a : "suzumiApiIsCool";
         this.baseURL = (_b = args === null || args === void 0 ? void 0 : args.url) !== null && _b !== void 0 ? _b : "https://badboy.is-a.dev/api";
     }
-    SuzumiApi.prototype.image = function (endpoint, data) {
-        if (data === void 0) { data = {}; }
+    SuzumiApi.prototype.image = function (endpoint, params) {
+        if (params === void 0) { params = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var image, err_1;
+            var image;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!endpoint)
                             throw "Missing endpoint";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/image/").concat(endpoint), {
-                                params: {
-                                    data: data,
-                                },
+                                params: params,
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
                             })];
-                    case 2:
+                    case 1:
                         image = _a.sent();
                         if (image.status == 404)
                             return [2 /*return*/, {
                                     error: "Unknown Endpoint.",
                                 }];
                         return [2 /*return*/, image.data];
-                    case 3:
-                        err_1 = _a.sent();
-                        throw err_1;
-                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    SuzumiApi.prototype.json = function (endpoint, data) {
-        if (data === void 0) { data = {}; }
+    SuzumiApi.prototype.json = function (endpoint, params) {
+        if (params === void 0) { params = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var json, err_2;
+            var json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!endpoint)
                             throw "Missing endpoint";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/json/").concat(endpoint), {
-                                params: {
-                                    data: data,
-                                },
+                                params: params,
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
                             })];
-                    case 2:
+                    case 1:
                         json = _a.sent();
                         if (json.status == 404)
                             return [2 /*return*/, {
                                     error: "Unknown Endpoint.",
                                 }];
                         return [2 /*return*/, json.data];
-                    case 3:
-                        err_2 = _a.sent();
-                        throw err_2;
-                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    SuzumiApi.prototype.get = function (category, endpoint, data) {
-        if (data === void 0) { data = {}; }
+    SuzumiApi.prototype.get = function (category, endpoint, params) {
+        if (params === void 0) { params = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var request, err_3;
+            var request;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!endpoint)
                             throw "Missing endpoint";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/").concat(category, "/").concat(endpoint), {
-                                params: {
-                                    data: data,
-                                },
+                                params: params,
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
                             })];
-                    case 2:
+                    case 1:
                         request = _a.sent();
                         if (request.status == 404)
                             return [2 /*return*/, {
                                     error: "Unknown Endpoint.",
                                 }];
                         return [2 /*return*/, request.data];
-                    case 3:
-                        err_3 = _a.sent();
-                        throw err_3;
-                    case 4: return [2 /*return*/];
                 }
             });
         });
