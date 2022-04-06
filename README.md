@@ -33,7 +33,7 @@ suzuApi.endpoint().then(data => {
 });
 ```
 *Returns*
-```
+```json
 [
   {
     description: 'Search videos on Youtube',
