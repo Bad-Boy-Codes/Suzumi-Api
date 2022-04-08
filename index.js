@@ -53,6 +53,7 @@ module.exports = /** @class */ (function () {
                             throw "Missing endpoint";
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/image/").concat(endpoint), {
                                 params: params,
+                                responseType: 'arraybuffer',
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
@@ -79,6 +80,7 @@ module.exports = /** @class */ (function () {
                             throw "Missing endpoint";
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/json/").concat(endpoint), {
                                 params: params,
+                                responseType: 'arraybuffer',
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
@@ -105,6 +107,7 @@ module.exports = /** @class */ (function () {
                             throw "Missing endpoint";
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/").concat(category, "/").concat(endpoint), {
                                 params: params,
+                                responseType: 'arraybuffer',
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
