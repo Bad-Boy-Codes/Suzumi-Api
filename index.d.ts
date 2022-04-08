@@ -15,7 +15,7 @@ export = class SuzumiApi {
 
     let image = await axios.get(`${this.baseURL}/image/${endpoint}`, {
       params,
-      responseType: 'arraybuffer',
+      responseType: "arraybuffer",
       headers: {
         Authorization: `Bearer ${this.token}`,
       },
@@ -32,19 +32,21 @@ export = class SuzumiApi {
   async json(endpoint: string, params = {}) {
     if (!endpoint) throw "Missing endpoint";
 
-    let json = await axios.get(`${this.baseURL}/json/${endpoint}`, {
-      params,
-      responseType: 'arraybuffer',
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    });
+    let e = false,
+      json = await axios
+        .get(`${this.baseURL}/json/${endpoint}`, {
+          params,
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .catch((err) => (e = err));
 
     if (json.status == 404)
       return {
         error: "Unknown Endpoint.",
       };
-
+    if (e) return e?.data?.toJSON();
     return json.data;
   }
 
@@ -52,7 +54,7 @@ export = class SuzumiApi {
     if (!endpoint) throw "Missing endpoint";
     let request = await axios.get(`${this.baseURL}/${category}/${endpoint}`, {
       params,
-      responseType: 'arraybuffer',
+      responseType: "arraybuffer",
       headers: {
         Authorization: `Bearer ${this.token}`,
       },

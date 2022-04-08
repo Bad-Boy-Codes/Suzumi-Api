@@ -53,7 +53,7 @@ module.exports = /** @class */ (function () {
                             throw "Missing endpoint";
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/image/").concat(endpoint), {
                                 params: params,
-                                responseType: 'arraybuffer',
+                                responseType: "arraybuffer",
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
@@ -70,27 +70,32 @@ module.exports = /** @class */ (function () {
         });
     };
     SuzumiApi.prototype.json = function (endpoint, params) {
+        var _a;
         if (params === void 0) { params = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var json;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var e, json;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         if (!endpoint)
                             throw "Missing endpoint";
-                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/json/").concat(endpoint), {
+                        e = false;
+                        return [4 /*yield*/, axios_1.default
+                                .get("".concat(this.baseURL, "/json/").concat(endpoint), {
                                 params: params,
-                                responseType: 'arraybuffer',
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
-                            })];
+                            })
+                                .catch(function (err) { return (e = err); })];
                     case 1:
-                        json = _a.sent();
+                        json = _b.sent();
                         if (json.status == 404)
                             return [2 /*return*/, {
                                     error: "Unknown Endpoint.",
                                 }];
+                        if (e)
+                            return [2 /*return*/, (_a = e === null || e === void 0 ? void 0 : e.data) === null || _a === void 0 ? void 0 : _a.toJSON()];
                         return [2 /*return*/, json.data];
                 }
             });
@@ -107,7 +112,7 @@ module.exports = /** @class */ (function () {
                             throw "Missing endpoint";
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/").concat(category, "/").concat(endpoint), {
                                 params: params,
-                                responseType: 'arraybuffer',
+                                responseType: "arraybuffer",
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
