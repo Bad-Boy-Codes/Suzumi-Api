@@ -1,6 +1,6 @@
 {
   "name": "suzumi-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "an api wrapper for Suzumi Api",
   "main": "index.js",
   "typings": "index.d.ts",
