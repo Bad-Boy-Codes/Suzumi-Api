@@ -43,37 +43,10 @@ module.exports = /** @class */ (function () {
         this.baseURL = (_b = args === null || args === void 0 ? void 0 : args.url) !== null && _b !== void 0 ? _b : "https://badboy.is-a.dev/api";
     }
     SuzumiApi.prototype.image = function (endpoint, params) {
-        if (params === void 0) { params = {}; }
-        return __awaiter(this, void 0, void 0, function () {
-            var image;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!endpoint)
-                            throw "Missing endpoint";
-                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/image/").concat(endpoint), {
-                                params: params,
-                                responseType: "arraybuffer",
-                                headers: {
-                                    Authorization: "Bearer ".concat(this.token),
-                                },
-                            })];
-                    case 1:
-                        image = _a.sent();
-                        if (image.status == 404)
-                            return [2 /*return*/, {
-                                    error: "Unknown Endpoint.",
-                                }];
-                        return [2 /*return*/, image.data];
-                }
-            });
-        });
-    };
-    SuzumiApi.prototype.json = function (endpoint, params) {
         var _a;
         if (params === void 0) { params = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var e, json;
+            var e, image;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -81,21 +54,48 @@ module.exports = /** @class */ (function () {
                             throw "Missing endpoint";
                         e = false;
                         return [4 /*yield*/, axios_1.default
-                                .get("".concat(this.baseURL, "/json/").concat(endpoint), {
+                                .get("".concat(this.baseURL, "/image/").concat(endpoint), {
                                 params: params,
+                                responseType: "arraybuffer",
                                 headers: {
                                     Authorization: "Bearer ".concat(this.token),
                                 },
                             })
-                                .catch(function (err) { return (e = err); })];
+                                .catch(function (er) { return (e = er); })];
                     case 1:
-                        json = _b.sent();
-                        if (json.status == 404)
+                        image = _b.sent();
+                        if (image.status == 404)
                             return [2 /*return*/, {
                                     error: "Unknown Endpoint.",
                                 }];
                         if (e)
                             return [2 /*return*/, (_a = e === null || e === void 0 ? void 0 : e.data) === null || _a === void 0 ? void 0 : _a.toJSON()];
+                        return [2 /*return*/, image.data];
+                }
+            });
+        });
+    };
+    SuzumiApi.prototype.json = function (endpoint, params) {
+        if (params === void 0) { params = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var json;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!endpoint)
+                            throw "Missing endpoint";
+                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseURL, "/json/").concat(endpoint), {
+                                params: params,
+                                headers: {
+                                    Authorization: "Bearer ".concat(this.token),
+                                },
+                            })];
+                    case 1:
+                        json = _a.sent();
+                        if (json.status == 404)
+                            return [2 /*return*/, {
+                                    error: "Unknown Endpoint.",
+                                }];
                         return [2 /*return*/, json.data];
                 }
             });
@@ -123,7 +123,7 @@ module.exports = /** @class */ (function () {
                             return [2 /*return*/, {
                                     error: "Unknown Endpoint.",
                                 }];
-                        return [2 /*return*/, request.data];
+                        return [2 /*return*/, request];
                 }
             });
         });
