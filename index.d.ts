@@ -7,7 +7,7 @@ export = class SuzumiApi {
   constructor(args?: { token?: string; url?: string }) {
     this.token = args?.token ?? "suzumiApiIsCool";
 
-    this.baseURL = args?.url ?? "https://badboy.is-a.dev/api";
+    this.baseURL = args?.url ?? "https://api.badboy.is-a.dev";
   }
 
   async image(endpoint: string, params = {}) {

@@ -40,7 +40,7 @@ module.exports = /** @class */ (function () {
     function SuzumiApi(args) {
         var _a, _b;
         this.token = (_a = args === null || args === void 0 ? void 0 : args.token) !== null && _a !== void 0 ? _a : "suzumiApiIsCool";
-        this.baseURL = (_b = args === null || args === void 0 ? void 0 : args.url) !== null && _b !== void 0 ? _b : "https://badboy.is-a.dev/api";
+        this.baseURL = (_b = args === null || args === void 0 ? void 0 : args.url) !== null && _b !== void 0 ? _b : "https://api.badboy.is-a.dev";
     }
     SuzumiApi.prototype.image = function (endpoint, params) {
         var _a;
